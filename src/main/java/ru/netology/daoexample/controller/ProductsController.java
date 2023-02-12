@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("products")
 public class ProductsController {
 
-    OrdersDao ordersDao;
+    private final OrdersDao ordersDao;
 
     public ProductsController(OrdersDao ordersDao) {
         this.ordersDao = ordersDao;

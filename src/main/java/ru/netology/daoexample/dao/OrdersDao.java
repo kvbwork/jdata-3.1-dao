@@ -18,7 +18,7 @@ public class OrdersDao {
     private static final String PRODUCT_NAME_BY_CUSTOMER_SQL_FILE_NAME = "productNameByCustomer.sql";
     private final String productNameByCustomerSql;
 
-    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     public OrdersDao(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
