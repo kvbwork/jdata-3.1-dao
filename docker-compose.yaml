@@ -1,0 +1,20 @@
+version: "3"
+services:
+  backend:
+    image: kvbdev/daoexample-rest
+    build: .
+    container_name: daoexample-rest
+    ports:
+      - 8080:8080
+    depends_on:
+      - dbserver
+  dbserver:
+    image: postgres:latest
+    container_name: daoexample-postgres
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: daoexample
+
