@@ -1,11 +1,10 @@
 package ru.netology.daoexample.dao;
 
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,10 +17,10 @@ public class OrdersDao {
     private static final String PRODUCT_NAME_BY_CUSTOMER_SQL_FILE_NAME = "productNameByCustomer.sql";
     private final String productNameByCustomerSql;
 
-    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public OrdersDao(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    public OrdersDao() {
         productNameByCustomerSql = readScript(PRODUCT_NAME_BY_CUSTOMER_SQL_FILE_NAME);
     }
 
@@ -35,7 +34,8 @@ public class OrdersDao {
     }
 
     public List<String> getProductName(String name) {
-        SqlParameterSource sqlParams = new MapSqlParameterSource("name", name);
-        return namedParameterJdbcTemplate.queryForList(productNameByCustomerSql, sqlParams, String.class);
+        return (List<String>) entityManager.createNativeQuery(productNameByCustomerSql)
+                .setParameter("name", name)
+                .getResultList();
     }
 }
