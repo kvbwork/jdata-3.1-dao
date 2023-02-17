@@ -22,7 +22,7 @@ public class CustomSqlDataSourceScriptDatabaseInitializer extends SqlDataSourceS
     private static final Logger logger = LoggerFactory.getLogger(CustomSqlDataSourceScriptDatabaseInitializer.class);
 
     @Value("${app.sql.init.marker-table}")
-    String markerTableName;
+    private String markerTableName;
 
     public CustomSqlDataSourceScriptDatabaseInitializer(DataSource dataSource, SqlInitializationProperties properties) {
         super(dataSource, properties);
