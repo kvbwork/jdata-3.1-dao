@@ -61,4 +61,12 @@ public class Order {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }
